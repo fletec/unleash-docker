@@ -21,8 +21,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - name: npm
-        run: npm install --no-optional
+#      - name: npm
+#        run: npm install
 #      - name: Login to docker hub
 #        uses: docker/login-action@v1
 #        with:
