@@ -4,6 +4,8 @@ WORKDIR /unleash
 
 COPY index.js package.json package-lock.json ./
 
+RUN npm install -g npm
+
 RUN npm install
 
 FROM node:16-alpine
