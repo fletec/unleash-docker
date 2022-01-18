@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 14.x
       - name: npm
-        run: npm install
+        run: npm install --no-optional
 #      - name: Login to docker hub
 #        uses: docker/login-action@v1
 #        with:
