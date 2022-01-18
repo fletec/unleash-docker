@@ -28,7 +28,7 @@ jobs:
       #        with:
       #          username: ${{ secrets.DOCKERHUB_USERNAME }}
       #          password: ${{ secrets.DOCKERHUB_TOKEN }}
-#      - name: Build
+      #      - name: Build
       #        run: |
       #          docker build .
       - name: Available platforms
@@ -50,5 +50,5 @@ jobs:
           tag_with_ref: true
           push: true
           tags: latest
-            secrets: |
-              GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN  }}
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN  }}
