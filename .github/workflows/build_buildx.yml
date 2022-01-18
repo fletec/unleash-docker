@@ -45,7 +45,7 @@ jobs:
       - name: Build & Push
         uses: docker/build-push-action@v2
         with:
-          repository: ${{ steps.login-ecr.outputs.registry }}/fletec-unleash
+          repository: ${{ secrets.AWS_ECR }}/fletec-unleash
           add_git_labels: true
           tag_with_ref: true
           push: true
