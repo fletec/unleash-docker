@@ -48,8 +48,10 @@ jobs:
           ECR_REPOSITORY: fletec-unleash
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker buildx -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker buildx build  --push --tag  $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+#          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+#          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 #      - name: Build & Push
 #        uses: docker/build-push-action@v2
 #        with:
