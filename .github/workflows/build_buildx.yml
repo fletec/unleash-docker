@@ -21,15 +21,34 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
-#      - name: npm
-#        run: npm install
-#      - name: Login to docker hub
-#        uses: docker/login-action@v1
-#        with:
-#          username: ${{ secrets.DOCKERHUB_USERNAME }}
-#          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build
-        run: |
-            docker build .
+      #      - name: npm
+      #        run: npm install
+      #      - name: Login to docker hub
+      #        uses: docker/login-action@v1
+      #        with:
+      #          username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#      - name: Build
+      #        run: |
+      #          docker build .
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Build & Push
+        uses: docker/build-push-action@v2
+        with:
+          repository: ${{ steps.login-ecr.outputs.registry }}/fletec-unleash
+          add_git_labels: true
+          tag_with_ref: true
+          push: true
+          tags: latest
+            secrets: |
+              GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN  }}
